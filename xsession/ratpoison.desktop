@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Ratpoison
+Comment=This session logs you into Ratpoison WM 
+Exec=/usr/bin/ratpoison
+TryExec=/usr/bin/ratpoison
+Type=Application
+DesktopNames=ubuntu:TheRat
