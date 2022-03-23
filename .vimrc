@@ -1,4 +1,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim Plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+
+" Nerd tree
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Fugitive
+Plug 'tpope/vim-fugitive'
+
+" Powerline
+"Plug 'powerline/powerline'
+"
+" Color shcemes
+Plug 'flazz/vim-colorschemes'
+
+" Initialize plugin system
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -12,35 +36,32 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * checktime
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-
 " Fast saving
 nmap <leader>w :w!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en'
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the Wild menu
 set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+
+" Set cursor line
+" set cursorline
 
 "Always show current position
 set ruler
@@ -84,14 +105,8 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
-
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 " Use hybrid line numbering
 set number relativenumber
@@ -102,13 +117,12 @@ set nu rnu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+set t_Co=256
 
 try
+    colorscheme vimbrains " Really Noice
+    "colorscheme Atelier_SeasideDark " Noice
+
     "colorscheme zellner " really good
     "colorscheme delek " nice, different, easy to read
     "colorscheme industry " good; lighter background
@@ -118,13 +132,13 @@ try
 
     "colorscheme desert " fine, but search hard to see
     "colorscheme koehler " fine; bold
-    colorscheme torte " ok; softer feel
+    "colorscheme torte " ok; softer feel
     "colorscheme peachpuff " ok
     "colorscheme ron " similar to peachpuff
     "colorscheme darkblue " ok; soft background, name doesn't make sense
     "colorscheme pablo " comments too light to read
     "colorscheme blue " So-so; a lot of blue background, but letters easy to read
-    "
+
     "colorscheme murphy " not enough color distinction for D
     "colorscheme evening " bad; background too bright
     "colorscheme shine " terrible; can't see numbering, too bright
@@ -132,7 +146,9 @@ try
 catch
 endtry
 
-set background=dark
+"set background=dark
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
