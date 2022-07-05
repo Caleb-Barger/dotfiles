@@ -11,14 +11,18 @@
 
 # Windows key
 set $mod Mod4
+
 # Alt key
 #set $mod Mod1
 
 # Wallpaper
-exec --no-startup-id nitrogen --restore &
+exec nitrogen --restore &
 
-# Start Compositor
-exec --no-startup-id compton -b
+# Set Res
+exec /home/caleb/.screenlayout/lowres.sh
+
+# Compositor
+exec picom -b
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -41,6 +45,9 @@ exec --no-startup-id nm-applet
 # Power applet
 exec --no-startup-id cbatticon
 
+# Bluetooth applet
+exec --no-startup-id blueman-applet
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -49,8 +56,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Xbacklight brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
