@@ -11,31 +11,31 @@ general {
         interval = 5
 }
 
-order += "disk /"
-order += "load"
-order += "memory"
-order += "volume master"
+#order += "disk /"
+#order += "load"
+#order += "memory"
+#order += "volume master"
 order += "tztime local"
 
-disk "/" {
-        format = "%avail"
-}
+#disk "/" {
+#        format = "%avail"
+#}
+#
+#load {
+#        format = "%1min"
+#}
 
-load {
-        format = "%1min"
-}
+#memory {
+#        format = "%used | %available"
+#        threshold_degraded = "1G"
+#        format_degraded = "MEMORY < %available"
+#}
 
-memory {
-        format = "%used | %available"
-        threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
-}
-
-volume master {
-        format = "vol: %volume"
-        format_muted = "vol: muted (%volume)"
-        device = "pulse"
-}
+#volume master {
+#        format = "vol: %volume"
+#        format_muted = "vol: muted (%volume)"
+#        device = "pulse"
+#}
 
 tztime local {
         format = "%H:%M:%S"
