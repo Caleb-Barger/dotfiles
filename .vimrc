@@ -61,6 +61,7 @@ if (empty($TMUX))
 endif
 
 let g:gruvbox_italic=1 " Enforce displaying italics
+set bg=dark
 colorscheme gruvbox
 
 " Set 7 lines to the cursor - when moving vertically using j/k
