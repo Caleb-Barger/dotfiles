@@ -1,1 +1,0 @@
-/home/caleb.barger/.config/vim/vimrc
