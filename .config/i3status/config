@@ -7,36 +7,33 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 5
+    interval = 5
+    output_format = "none"
+    colors = true
+    color_good = "#66dffd"
+    color_degraded = "#692E81"
+    color_bad = "#B00000"
 }
 
-#order += "disk /"
-#order += "load"
-#order += "memory"
-#order += "volume master"
-order += "tztime local"
 
-#disk "/" {
-#        format = "%avail"
-#}
-#
-#load {
-#        format = "%1min"
-#}
+order += "memory"
+order += "cpu_usage"
+order += "disk /"
+order += "time"
 
-#memory {
-#        format = "%used | %available"
-#        threshold_degraded = "1G"
-#        format_degraded = "MEMORY < %available"
-#}
+memory {
+    format = "mem: %used"
+}
 
-#volume master {
-#        format = "vol: %volume"
-#        format_muted = "vol: muted (%volume)"
-#        device = "pulse"
-#}
+cpu_usage {
+    format = "cpu: %usage"
+}
 
-tztime local {
-        format = "%H:%M:%S"
+disk "/" {
+        format = "disk: %avail"
+}
+
+
+time {
+        format = "%a %d %b %Y - %I:%M %Z"
 }

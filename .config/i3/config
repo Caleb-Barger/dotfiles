@@ -16,20 +16,23 @@ set $mod Mod4
 #set $mod Mod1
 
 # Wallpaper
-exec nitrogen --restore &
+exec --no-startup-id nitrogen --restore &
 
 # Set Res
-exec /home/caleb/.screenlayout/lowres.sh
+exec --no-startup-id /home/caleb/.screenlayout/lowres.sh
 
 # Compositor
-exec picom -b
+exec --no-startup-id picom -b
+
+# Redshift TODO(cjb): don't hardcode cords...
+exec redshift -l 46.733688:-117.000000
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Hack-Regular 10
+font pango:FiraCode Regular 10
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -112,6 +115,24 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+# You can also use any non-zero value if you'd like to have a border
+default_border pixel 0
+
+#gaps inner|outer|horizontal|vertical|top|right|bottom|left current|all set|plus|minus|toggle <px>
+
+for_window [class="^.*"] border pixel 2
+gaps inner 5
+gaps outer 5
+
+# Activate smart borders (always)
+smart_borders on
+
+# Activate smart borders (only when there are effectively no gaps)
+smart_borders no_gaps
+
+# Hide edge borders only if there is one window with no gaps
+hide_edge_borders smart_no_gaps
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -126,10 +147,10 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $web "1: web"
-set $term "2: term"
-set $chat "3: chat"
-set $ws4 "4"
+set $web "1: "
+set $term "2: "
+set $chat "3: "
+set $music "4: "
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -141,7 +162,7 @@ set $ws10 "10"
 bindsym $mod+1 workspace $web
 bindsym $mod+2 workspace $term
 bindsym $mod+3 workspace $chat
-bindsym $mod+4 workspace number $ws4
+bindsym $mod+4 workspace number $music
 bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
@@ -153,7 +174,7 @@ bindsym $mod+0 workspace number $ws10
 bindsym $mod+Shift+1 move container to workspace $web
 bindsym $mod+Shift+2 move container to workspace $term
 bindsym $mod+Shift+3 move container to workspace $chat
-bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+4 move container to workspace number $music
 bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
@@ -165,6 +186,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 assign [class="firefox" instance="Navigator"] $web
 assign [class="Terminator" instance="terminator"] $term
 assign [class="discord" instance="discord"] $chat
+assign [class="Spotify" instance="spotify"] $music
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -197,10 +219,11 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 bar {
+    font pango:FiraCode Regular 10
+    mode dock
     status_command i3status
     position top
     tray_padding 1
