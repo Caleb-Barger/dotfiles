@@ -15,3 +15,4 @@ cp -r .config/ $HOME/
 ln -sf -T $HOME/.config/vim/vimrc $HOME/.vimrc
 
 cp -r ./xorg.conf.d/ /etc/X11/
+cp -r ./pacman.d/ /etc/pacman.d/
