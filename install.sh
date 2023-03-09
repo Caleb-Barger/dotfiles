@@ -5,6 +5,12 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+# Install packages from package list.
+
+pacman -S --needed $(comm -12 <(pacman -Slq | sort) <(sort pkglist.txt))
+
+cp .bashrc $HOME/
+cp .bash_aliases $HOME/
 cp -r .config/ $HOME/
 ln -sf -T $HOME/.config/vim/vimrc $HOME/.vimrc
 
