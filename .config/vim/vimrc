@@ -18,11 +18,30 @@ call plug#begin()
 " Smooth scroll
 Plug 'psliwka/vim-smoothie'
 
-" Gruvbox
-Plug 'morhetz/gruvbox'
+" Zig highlight
+Plug 'ziglang/zig.vim'
+
+" Markdown previewer
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+" Common configs for built in language server client
+Plug 'neovim/nvim-lspconfig'
+
+" Better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter'
+
+" Autocomplete
+Plug 'ycm-core/YouCompleteMe'
+
+" Fuzy finder
+"Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'BurntSushi/ripgrep'
 
 " Initialize plugin system
 call plug#end()
+
+let g:zig_fmt_autosave = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -60,9 +79,8 @@ if (empty($TMUX))
   endif
 endif
 
-let g:gruvbox_italic=1 " Enforce displaying italics
-set bg=dark
-colorscheme gruvbox
+" highlight LineNr ctermbg=darkgray ctermfg=white
+colorscheme abra
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -132,7 +150,6 @@ set nu rnu
 " Enable syntax highlighting
 syntax enable
 
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -154,20 +171,20 @@ set noswapfile
 " Use spaces instead of tabs
 set expandtab
 
-" Be smart when using tabs ;)
+" Be smart when using tabs
 set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 500 characters
+" Linebreak on 100 characters
 set lbr
-set tw=0
+set tw=100
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+set nowrap "Don't wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Buffer management
