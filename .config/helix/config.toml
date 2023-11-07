@@ -2,7 +2,12 @@ theme = "autumn_night"
 
 [editor]
 line-number = "relative"
-mouse = false
+mouse = true
+true-color = true
+cursorline = true
+completion-replace = true
+bufferline = "always"
+auto-pairs = false  
 
 [editor.cursor-shape]
 insert = "bar"
@@ -10,4 +15,8 @@ normal = "block"
 select = "underline"
 
 [editor.file-picker]
-hidden = false
+hidden = true # Ignore hidden files 
+
+[editor.lsp]
+auto-signature-help = false
+display-messages = true
