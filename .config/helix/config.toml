@@ -1,12 +1,10 @@
-theme = "autumn_night"
+theme = "base16_transparent"
 
 [editor]
 line-number = "relative"
 mouse = true
 true-color = true
 cursorline = true
-completion-replace = true
-bufferline = "always"
 auto-pairs = false  
 
 [editor.cursor-shape]
@@ -19,4 +17,3 @@ hidden = true # Ignore hidden files
 
 [editor.lsp]
 auto-signature-help = false
-display-messages = true
