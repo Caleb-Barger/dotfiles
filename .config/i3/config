@@ -32,6 +32,7 @@ set $terma "2: "
 set $termb "3: "
 set $chat "4: "
 set $music "5: "
+set $games "6: "
 
 # Force applications to start on certain workspaces
 assign [class="firefox" instance="Navigator"] $web
@@ -97,6 +98,8 @@ bindsym $mod+2 workspace $terma
 bindsym $mod+3 workspace $termb
 bindsym $mod+4 workspace $chat
 bindsym $mod+5 workspace $music
+bindsym $mod+6 workspace $games
+
 
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $web
@@ -104,6 +107,7 @@ bindsym $mod+Shift+2 move container to workspace $terma
 bindsym $mod+Shift+3 move container to workspace $termb
 bindsym $mod+Shift+4 move container to workspace $chat
 bindsym $mod+Shift+5 move container to workspace $music
+bindsym $mod+Shift+6 move container to workspace $games
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -144,19 +148,17 @@ floating_modifier $mod
 
 # Program launcher
 bindsym $mod+d exec dmenu_run \
-    -fn '8\-bit Operator+8-15' \
+    -fn 'ComicMono-13' \
     -nb '#000000' -sb '#ffffff' \
     -nf '#888888' -sf '#1d1f21' \
     -l 5 \
 
 # i3 styling -------------------------------------------------------------------------------------
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:FiraCode Regular 11
+font pango:FiraCode Regular 12
 
-for_window [class="^.*"] border pixel 1
-gaps inner 1
-gaps outer 1
+for_window [class="^.*"] border pixel 4
+gaps inner 2
+gaps outer 2
 
 # Activate smart borders (always)
 smart_borders on
@@ -182,5 +184,5 @@ bar {
         background #000000
         statusline #ffffff
     }
-    font pango:8-bitOperator+8 Regular 15
+    font pango:ComicMono Regular 12
 }
