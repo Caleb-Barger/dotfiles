@@ -1,12 +1,34 @@
+#
+# Sway configuration file 
+# Caleb Barger
+# 02/13/24
+#
+
+#//////////////////////////////
+#~ cabarger: Keyboard
+
+input type:keyboard {
+  # Capslock key should work as escape key
+  # See /usr/share/X11/xkb/rules/xorg.lst for options
+  xkb_options caps:escape
+}
+
+exec swayidle -w \
+	timeout 1800 'swaylock -f' \
+	timeout 1805 'swaymsg "output * power off"' \
+	resume 'swaymsg "output * power on"'
+
 # Start programs ---------------------------------------------------------------------------------
 # Set wallpaper
-exec --no-startup-id nitrogen --restore &
+# exec --no-startup-id nitrogen --restore &
+output "*" bg ~/Downloads/zero.svg tile '#000000'
 
 # Launch compositor
-exec --no-startup-id picom -b 
+# exec --no-startup-id picom -b 
 
 # Night-light (Moscow, ID) 
-exec redshift -l 46.733688:-117.000000
+# exec redshift -l 46.733688:-117.000000
+exec gammastep -l 46.733688:-117.000000
 
 # Network manager applet
 exec --no-startup-id nm-applet
@@ -15,7 +37,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id cbatticon
 
 # Bluetooth applet
-exec --no-startup-id blueman-applet
+# exec --no-startup-id blueman-applet
 
 # Pulse audio applet
 exec --no-startup-id pa-applet
@@ -27,12 +49,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Configure workspaces ----------------------------------------------------------------------------
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $web "1: "
-set $terma "2: "
-set $termb "3: "
-set $chat "4: "
-set $music "5: "
-set $games "6: "
+set $web "1: web"
+set $terma "2: term"
+set $termb "3: termb"
+set $chat "4: chat"
+set $music "5: music"
 
 # Force applications to start on certain workspaces
 assign [class="firefox" instance="Navigator"] $web
@@ -98,8 +119,6 @@ bindsym $mod+2 workspace $terma
 bindsym $mod+3 workspace $termb
 bindsym $mod+4 workspace $chat
 bindsym $mod+5 workspace $music
-bindsym $mod+6 workspace $games
-
 
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $web
@@ -107,7 +126,6 @@ bindsym $mod+Shift+2 move container to workspace $terma
 bindsym $mod+Shift+3 move container to workspace $termb
 bindsym $mod+Shift+4 move container to workspace $chat
 bindsym $mod+Shift+5 move container to workspace $music
-bindsym $mod+Shift+6 move container to workspace $games
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -140,25 +158,25 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec brightnessctl s -10%
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Program launcher
-bindsym $mod+d exec dmenu_run \
-    -fn 'ComicMono-13' \
-    -nb '#000000' -sb '#ffffff' \
-    -nf '#888888' -sf '#1d1f21' \
-    -l 5 \
+bindsym $mod+d exec bemenu-run \
+    --fn 'ComicMono Regular 15' \
+	-c \
 
 # i3 styling -------------------------------------------------------------------------------------
-font pango:FiraCode Regular 12
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:FiraCode Regular 11
 
-for_window [class="^.*"] border pixel 4
-gaps inner 2
-gaps outer 2
+for_window [class="^.*"] border pixel 1
+gaps inner 1
+gaps outer 1
 
 # Activate smart borders (always)
 smart_borders on
@@ -169,17 +187,19 @@ smart_borders no_gaps
 # Hide edge borders only if there is one window with no gaps
 hide_edge_borders smart_no_gaps
 
+output "*" scale 2
+
 bar {
     status_command i3status
     position top
-    tray_padding 1
+    tray_padding 2
 
     colors {
         # colorclass       <border> <background> <text>
-        focused_workspace #888888 #000000 #ffffff #1d1f21
-        inactive_workspace #000000 #000000 #888888 #969896
-        active_workspace #333333 #5f676a #ffffff #ffffff
-        urgent_workspace #333333 #4f676a #ffffff #ffffff
+        #focused_workspace #888888 #000000 #ffffff #1d1f21
+        #inactive_workspace #000000 #000000 #888888 #969896
+        #active_workspace #333333 #5f676a #ffffff #ffffff
+        #urgent_workspace #333333 #4f676a #ffffff #ffffff
         separator #666666
         background #000000
         statusline #ffffff

@@ -15,10 +15,10 @@ general {
     color_bad = "#B00000"
 }
 
-
 order += "memory"
 order += "cpu_usage"
 order += "disk /"
+order += "battery 0"
 order += "time"
 
 memory {
@@ -33,7 +33,12 @@ disk "/" {
         format = "disk: %avail"
 }
 
+battery 0 {
+	format = "%status %percentage"
+    path = "/sys/class/power_supply/CMB0/uevent"
+}
 
 time {
-        format = "%a %d %b %Y - %I:%M %Z"
+    format = "%a %d %b %Y %I:%M %Z"
 }
+
